@@ -26,19 +26,16 @@ Suíte de testes para o endpoint `/usuarios` da [ServeRest](https://compassuol.s
 ## Como rodar
 
 ```bash
-# 1. Clone o repositório
-git clone <url-do-repo>
-cd serverest-tests
 
-# 2. Crie e ative o ambiente virtual
+# 1. Crie e ative o ambiente virtual
 python -m venv venv
 source venv/bin/activate        # Linux/macOS
 venv\Scripts\activate           # Windows
 
-# 3. Instale as dependências
+# 2. Instale as dependências
 pip install -r requirements.txt
 
-# 4. Execute os testes
+# 3. Execute os testes
 pytest
 
 # Rodar apenas os testes de usuários
@@ -69,11 +66,3 @@ pytest -v
 | 12 | Excluir usuário existente retorna 200 | DELETE /usuarios/:id |
 | 13 | Excluir ID inexistente retorna 200 sem exclusão | DELETE /usuarios/:id |
 
-## Padrões adotados
-
-- **Nomenclatura descritiva**: nomes no formato `test_acao_condicao_resultado_esperado`
-- **AAA**: cada teste segue Arrange → Act → Assert com comentários visuais
-- **Independência**: nenhum teste depende de outro; fixtures cuidam do setup/teardown
-- **Emails dinâmicos**: `uuid` garante emails únicos a cada execução
-- **Asserts específicos**: validam status code *e* estrutura/conteúdo da resposta
-- **Cleanup com yield**: fixture `usuario_cadastrado` remove o usuário ao final do teste
