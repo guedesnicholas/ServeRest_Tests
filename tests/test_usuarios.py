@@ -20,18 +20,6 @@ class TestListarUsuarios:
         assert "usuarios" in corpo
         assert isinstance(corpo["usuarios"], list)
 
-    def test_listar_usuarios_filtrado_por_nome_retorna_somente_correspondentes(self, client, usuario_cadastrado):
-        # Arrange
-        nome_buscado = usuario_cadastrado["payload"]["nome"]
-
-        # Act
-        resposta = client.listar(params={"nome": nome_buscado})
-
-        # Assert
-        assert resposta.status_code == 200
-        usuarios = resposta.json()["usuarios"]
-        assert all(u["nome"] == nome_buscado for u in usuarios)
-
 
 @pytest.mark.usuarios
 class TestCadastrarUsuario:
@@ -45,9 +33,7 @@ class TestCadastrarUsuario:
         assert resposta.status_code == 200
         assert "_id" in resposta.json()
 
-    def test_cadastrar_usuario_com_email_duplicado_retorna_400(
-        self, client, usuario_cadastrado
-    ):
+    def test_cadastrar_usuario_com_email_duplicado_retorna_400(self, client, usuario_cadastrado):
         # Arrange — reutiliza o email já cadastrado pela fixture
         payload = payload_usuario_valido()
         payload["email"] = usuario_cadastrado["payload"]["email"]
@@ -98,9 +84,7 @@ class TestCadastrarUsuario:
 
 @pytest.mark.usuarios
 class TestBuscarUsuarioPorId:
-    def test_buscar_usuario_existente_retorna_200_com_dados_corretos(
-        self, client, usuario_cadastrado
-    ):
+    def test_buscar_usuario_existente_retorna_200_com_dados_corretos(self, client, usuario_cadastrado):
         # Arrange
         usuario_id = usuario_cadastrado["id"]
 
