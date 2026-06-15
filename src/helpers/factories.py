@@ -9,3 +9,14 @@ def payload_usuario_valido(admin=False):
         "password": "senha123",
         "administrador": "true" if admin else "false",
     }
+
+
+
+def payload_produto_valido():
+    #Retorna payload completo e válido para cadastro de usuário.
+    return {
+        "nome": "Produto aleatorio",
+        "preco": "12345",
+        "descricao": "senha123",
+        "quantidade": "1",
+    }
