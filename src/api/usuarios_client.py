@@ -22,3 +22,7 @@ class UsuariosClient:
 
     def excluir(self, usuario_id):
         return requests.delete(f"{self.base}/{usuario_id}")
+
+    
+    def login(self, payload):
+        return requests.post(f"{BASE_URL}/login", json=payload)
