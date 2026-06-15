@@ -11,14 +11,17 @@ class ProdutosClient:
     def listar(self, params=None):
         return requests.get(self.base, params=params)
 
-    def cadastrar(self, payload):
-        return requests.post(self.base, json=payload)
+    def cadastrar(self, payload, token):
+        headers = {"Authorization": token} if token else {}
+        return requests.post(self.base, json=payload, headers=headers)
 
-    def buscar_por_id(self, produtos_id):
-        return requests.get(f"{self.base}/{produtos_id}")
+    def buscar_por_id(self, produto_id):
+        return requests.get(f"{self.base}/{produto_id}")
 
-    def atualizar(self, produtos_id, payload):
-        return requests.put(f"{self.base}/{produtos_id}", json=payload)
+    def atualizar(self, produto_id, payload, token):
+        headers = {"Authorization": token} if token else {}
+        return requests.put(f"{self.base}/{produto_id}", json=payload, headers=headers)
 
-    def excluir(self, produtos_id):
-        return requests.delete(f"{self.base}/{produtos_id}")
+    def excluir(self, produto_id, token):
+        headers = {"Authorization": token} if token else {}
+        return requests.delete(f"{self.base}/{produto_id}", headers=headers)
