@@ -150,6 +150,34 @@ class TestAtualizarUsuario:
         novo_id = corpo.get("_id")
         if novo_id:
             client.excluir(novo_id)
+    
+    def test_atualizar_usuario_com_email_ja_usado_retorna_400(self, client):
+        # Arrange — cria dois usuários
+        payload1 = payload_usuario_valido()
+        payload2 = payload_usuario_valido()
+
+        criacao1 = client.cadastrar(payload1)
+        assert criacao1.status_code == 201
+        usuario_id1 = criacao1.json()["_id"]
+
+        criacao2 = client.cadastrar(payload2)
+        assert criacao2.status_code == 201
+        usuario_id2 = criacao2.json()["_id"]
+
+        # tenta atualizar usuario2 com o email do usuario1
+        payload_atualizado = payload_usuario_valido()
+        payload_atualizado["email"] = payload1["email"]
+
+        # Act
+        resposta = client.atualizar(usuario_id2, payload_atualizado)
+
+        # Assert
+        assert resposta.status_code == 400
+
+        # Cleanup
+        client.excluir(usuario_id1)
+        client.excluir(usuario_id2)
+
 
 
 @pytest.mark.usuarios
