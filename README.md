@@ -13,7 +13,9 @@ Suíte de testes para o endpoint `/usuarios` , `/login` e `/produtos` da [ServeR
 │       └── factories.py         # Geração de dados dinâmicos
 ├── tests/
 │   ├── conftest.py              # Fixtures globais (com cleanup via yield)
-│   └── test_usuarios.py        # 13 cenários de teste
+│   |── test_usuarios.py         # 13 cenários de teste
+│   |── test_login.py            #  3 cenários de teste
+│   └── test_produtos.py         # 16 cenários de teste
 ├── pytest.ini
 └── requirements.txt
 ```
@@ -61,8 +63,28 @@ pytest -v
 | 7 | Buscar por ID existente retorna 200 com dados corretos | GET /usuarios/:id |
 | 8 | Buscar por ID inexistente retorna 400 | GET /usuarios/:id |
 | 9 | Atualizar usuário existente retorna 200 | PUT /usuarios/:id |
-| 10 | Atualizar ID inexistente cria novo usuário (upsert) | PUT /usuarios/:id |
+| 10 | Atualizar ID inexistente cria novo usuário 201 | PUT /usuarios/:id |
 | 11 | Atualizar usuário com email que já está cadastrado 400 | PUT /usuarios/:id |
 | 12 | Excluir usuário existente retorna 200 | DELETE /usuarios/:id |
 | 13 | Excluir ID inexistente retorna 200 sem exclusão | DELETE /usuarios/:id |
+| 14 | Login com credenciais válidas retorna 200 e token | POST /login |
+| 15 | Login com email inexistente retorna 401 | POST /login |
+| 16 | Login com password incorreto retorna 401 | POST /login |
+| 17 | Listar produtos retorna 200 e estrutura correta | GET /produtos |
+| 18 | Cadastrar produto válido retorna 201 com `_id` | POST /produtos |
+| 19 | Cadastrar produto sem token retorna 401 | POST /produtos |
+| 20 | Cadastrar produto com nome duplicado retorna 400 | POST /produtos |
+| 21 | Cadastrar produto sem nome retorna 400 | POST /produtos |
+| 22 | Cadastrar produto sem preco retorna 400 | POST /produtos |
+| 23 | Cadastrar produto sem descricao retorna 400 | POST /produtos |
+| 24 | Cadastrar produto sem quantidade retorna 400 | POST /produtos |
+| 25 | Buscar produto por ID existente retorna 200 | GET /produtos/:id |
+| 26 | Buscar produto por ID inexistente retorna 400 | GET /produtos/:id |
+| 27 | Atualizar produto existente retorna 200 | PUT /produtos/:id |
+| 28 | Atualizar produto sem token retorna 401 | PUT /produtos/:id |
+| 29 | Atualizar produto com nome duplicado retorna 400 | PUT /produtos/:id |
+| 30 | Excluir produto existente retorna 200 | DELETE /produtos/:id |
+| 31 | Excluir produto inexistente retorna 400 | DELETE /produtos/:id |
+| 32 | Excluir produto sem token retorna 401 | DELETE /produtos/:id |
+
 

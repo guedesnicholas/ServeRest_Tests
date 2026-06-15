@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Validar o comportamento dos endpoints `/usuarios` e `/login` da ServeRest
+Validar o comportamento dos endpoints `/usuarios` , `/login` e `/produtos` da ServeRest
 garantindo que todas as operações funcionam conforme esperado, retornam os status codes
 corretos e respeitam as regras de negócio da API.
 
@@ -65,7 +65,7 @@ corretos e respeitam as regras de negócio da API.
 |---|---|---|---|
 | 09 | Atualizar usuário existente | 200 | ✅ |
 | 10 | Atualizar ID inexistente cria novo usuário (upsert) | 201 | ✅ |
-| 11 | Atualizar com email já usado por outro usuário | 400 | ⬜ |
+| 11 | Atualizar com email já usado por outro usuário | 400 | ✅ |
 
 ### DELETE /usuarios/:id
 | # | Cenário | Status Esperado | Implementado |
@@ -88,41 +88,38 @@ corretos e respeitam as regras de negócio da API.
 ### GET /produtos
 | # | Cenário | Status Esperado | Implementado |
 |---|---|---|---|
-| 17 | Listar todos os produtos | 200 | ⬜ |
-| 18 | Filtrar por nome retorna só correspondentes | 200 | ⬜ |
+| 17 | Listar todos os produtos | 200 | ✅ |
 
 ### POST /produtos
 | # | Cenário | Status Esperado | Implementado |
 |---|---|---|---|
-| 19 | Cadastrar produto com dados válidos | 201 | ⬜ |
-| 20 | Cadastrar produto sem token | 401 | ⬜ |
-| 21 | Cadastrar produto com nome duplicado | 400 | ⬜ |
-| 22 | Cadastrar sem campo nome | 400 | ⬜ |
-| 23 | Cadastrar sem campo preco | 400 | ⬜ |
-| 24 | Cadastrar sem campo descricao | 400 | ⬜ |
-| 25 | Cadastrar sem campo quantidade | 400 | ⬜ |
+| 18 | Cadastrar produto com dados válidos | 201 | ✅ |
+| 19 | Cadastrar produto sem token | 401 | ✅ |
+| 20 | Cadastrar produto com nome duplicado | 400 | ✅ |
+| 21 | Cadastrar sem campo nome | 400 | ✅ |
+| 22 | Cadastrar sem campo preco | 400 | ✅ |
+| 23 | Cadastrar sem campo descricao | 400 | ✅ |
+| 24 | Cadastrar sem campo quantidade | 400 | ✅ |
 
 ### GET /produtos/:id
 | # | Cenário | Status Esperado | Implementado |
 |---|---|---|---|
-| 26 | Buscar produto com ID existente | 200 | ⬜ |
-| 27 | Buscar produto com ID inexistente | 400 | ⬜ |
+| 25 | Buscar produto com ID existente | 200 | ✅ |
+| 26 | Buscar produto com ID inexistente | 400 | ✅ |
 
 ### PUT /produtos/:id
 | # | Cenário | Status Esperado | Implementado |
 |---|---|---|---|
-| 28 | Atualizar produto existente | 200 | ⬜ |
-| 29 | Atualizar sem token | 401 | ⬜ |
-| 30 | Atualizar com nome já usado por outro produto | 400 | ⬜ |
-| 31 | Atualizar ID inexistente cria novo produto (upsert) | 201 | ⬜ |
+| 27 | Atualizar produto existente | 200 | ✅ |
+| 28 | Atualizar sem token | 401 | ✅ |
+| 29 | Atualizar com nome já usado por outro produto | 400 | ✅ |
 
 ### DELETE /produtos/:id
 | # | Cenário | Status Esperado | Implementado |
 |---|---|---|---|
-| 32 | Excluir produto existente | 200 | ⬜ |
-| 33 | Excluir produto inexistente | 200 | ⬜ |
-| 34 | Excluir produto com carrinho ativo | 400 | ⬜ |
-| 35 | Excluir sem token | 401 | ⬜ |
+| 30 | Excluir produto existente | 200 | ✅ |
+| 31 | Excluir produto inexistente | 200 | ✅ |
+| 32 | Excluir sem token | 401 | ✅ |
 
 ---
 
