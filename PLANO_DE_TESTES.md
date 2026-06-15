@@ -28,9 +28,10 @@ corretos e respeitam as regras de negócio da API.
 ### Coberto
 - Listar, cadastrar, buscar, atualizar e excluir usuários
 - Autenticação via login com credenciais válidas e inválidas
+- Listar, cadastrar, buscar, atualizar e excluir produtos
+
 
 ### Fora do escopo
-- Endpoint de produtos (`/produtos`)
 - Endpoint de carrinhos (`/carrinhos`)
 - Testes de carga e performance
 - Testes de contrato (schema validation)
@@ -81,6 +82,47 @@ corretos e respeitam as regras de negócio da API.
 | 14 | Login com credenciais válidas retorna token | 200 | ✅ |
 | 15 | Login com email inexistente | 401 | ✅ |
 | 16 | Login com password incorreto | 401 | ✅ |
+
+---
+
+### GET /produtos
+| # | Cenário | Status Esperado | Implementado |
+|---|---|---|---|
+| 17 | Listar todos os produtos | 200 | ⬜ |
+| 18 | Filtrar por nome retorna só correspondentes | 200 | ⬜ |
+
+### POST /produtos
+| # | Cenário | Status Esperado | Implementado |
+|---|---|---|---|
+| 19 | Cadastrar produto com dados válidos | 201 | ⬜ |
+| 20 | Cadastrar produto sem token | 401 | ⬜ |
+| 21 | Cadastrar produto com nome duplicado | 400 | ⬜ |
+| 22 | Cadastrar sem campo nome | 400 | ⬜ |
+| 23 | Cadastrar sem campo preco | 400 | ⬜ |
+| 24 | Cadastrar sem campo descricao | 400 | ⬜ |
+| 25 | Cadastrar sem campo quantidade | 400 | ⬜ |
+
+### GET /produtos/:id
+| # | Cenário | Status Esperado | Implementado |
+|---|---|---|---|
+| 26 | Buscar produto com ID existente | 200 | ⬜ |
+| 27 | Buscar produto com ID inexistente | 400 | ⬜ |
+
+### PUT /produtos/:id
+| # | Cenário | Status Esperado | Implementado |
+|---|---|---|---|
+| 28 | Atualizar produto existente | 200 | ⬜ |
+| 29 | Atualizar sem token | 401 | ⬜ |
+| 30 | Atualizar com nome já usado por outro produto | 400 | ⬜ |
+| 31 | Atualizar ID inexistente cria novo produto (upsert) | 201 | ⬜ |
+
+### DELETE /produtos/:id
+| # | Cenário | Status Esperado | Implementado |
+|---|---|---|---|
+| 32 | Excluir produto existente | 200 | ⬜ |
+| 33 | Excluir produto inexistente | 200 | ⬜ |
+| 34 | Excluir produto com carrinho ativo | 400 | ⬜ |
+| 35 | Excluir sem token | 401 | ⬜ |
 
 ---
 
