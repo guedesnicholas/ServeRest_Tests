@@ -12,11 +12,12 @@ def payload_usuario_valido(admin=False):
 
 
 
+
 def payload_produto_valido():
-    #Retorna payload completo e válido para cadastro de usuário.
+    #Retorna payload completo e válido para cadastro de produtos.
     return {
-        "nome": "Produto aleatorio",
-        "preco": "12345",
-        "descricao": "senha123",
-        "quantidade": "1",
+        "nome": f"Produto Teste {uuid.uuid4().hex[:8]}",
+        "preco": 100,
+        "descricao": "Produto criado por teste automatizado",
+        "quantidade": 10,
     }
