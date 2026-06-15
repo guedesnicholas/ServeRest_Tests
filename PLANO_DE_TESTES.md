@@ -78,9 +78,9 @@ corretos e respeitam as regras de negócio da API.
 ### POST /login
 | # | Cenário | Status Esperado | Implementado |
 |---|---|---|---|
-| 14 | Login com credenciais válidas retorna token | 200 | ⬜ |
-| 15 | Login com email inexistente | 401 | ⬜ |
-| 16 | Login com password incorreto | 401 | ⬜ |
+| 14 | Login com credenciais válidas retorna token | 200 | ✅ |
+| 15 | Login com email inexistente | 401 | ✅ |
+| 16 | Login com password incorreto | 401 | ✅ |
 
 ---
 

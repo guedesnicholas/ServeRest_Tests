@@ -1,6 +1,6 @@
 # ServeRest — Testes Automatizados: Usuários
 
-Suíte de testes para o endpoint `/usuarios` da [ServeRest](https://compassuol.serverest.dev/).
+Suíte de testes para o endpoint `/usuarios` e `/login` da [ServeRest](https://compassuol.serverest.dev/).
 
 ## Estrutura do projeto
 
