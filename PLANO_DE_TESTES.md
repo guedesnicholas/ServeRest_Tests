@@ -34,8 +34,10 @@ corretos e respeitam as regras de negócio da API.
 ### Fora do escopo
 - Endpoint de carrinhos (`/carrinhos`)
 - Testes de carga e performance
-- Testes de contrato (schema validation)
-
+- Validações de boundary em /usuarios
+- Validações de boundary em /produtos
+- Cenário: Excluir usuário com carrinho ativo
+- Cenário: Excluir produto com carrinho ativo
 ---
 
 ## Cenários por Endpoint

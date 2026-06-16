@@ -10,7 +10,8 @@ Suíte de testes para o endpoint `/usuarios` , `/login` e `/produtos` da [ServeR
 │   ├── api/
 │   │   └── usuarios_client.py   # Cliente HTTP para o endpoint
 │   └── helpers/
-│       └── factories.py         # Geração de dados dinâmicos
+│       |── factories.py         # Geração de dados dinâmicos
+|       └── schemas.py
 ├── tests/
 │   ├── conftest.py              # Fixtures globais (com cleanup via yield)
 │   |── test_usuarios.py         # 13 cenários de teste
@@ -113,3 +114,46 @@ pelos testes para cada endpoint coberto.
 | **Total** | **todos** | **todos** | **100%** |
 
 
+## Validação de Contrato
+
+Foram implementadas validações de contrato utilizando JSON Schema para garantir que as respostas da API mantenham a estrutura esperada.
+
+Endpoints cobertos:
+- POST /usuarios
+- POST /login
+- POST /produtos
+- GET /produtos/{id}
+
+
+## Cenários fora do escopo
+
+### /carrinhos
+O endpoint de carrinhos não foi coberto nesta suíte pois não
+estava previsto a cobertura.
+
+### Validações de boundary em /usuarios
+| Cenário | Motivo |
+|---|---|
+| Email com formato inválido | Fora do escopo mínimo definido |
+| Password vazio | Fora do escopo mínimo definido |
+
+### Validações de boundary em /produtos
+| Cenário | Motivo |
+|---|---|
+| Preco negativo | Fora do escopo mínimo definido |
+| Preco zero | Fora do escopo mínimo definido |
+| Quantidade negativa | Fora do escopo mínimo definido |
+| Quantidade zero | Fora do escopo mínimo definido |
+
+### Testes de performance e carga
+Não foram realizados testes de carga ou stress. A ServeRest é um
+ambiente público compartilhado — testes de carga poderiam impactar
+outros usuários da plataforma.
+
+### Cenário: Excluir usuário com carrinho ativo
+A ServeRest retorna 400 ao tentar excluir um usuário que possui
+carrinho ativo. Este cenário não foi coberto pois exigiria interação
+com o endpoint /carrinhos, que está fora do escopo desta suíte.
+
+### Cenário: Excluir produto com carrinho ativo
+Mesmo motivo do cenário anterior — exigiria interação com /carrinhos.
