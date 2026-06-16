@@ -101,6 +101,14 @@ class TestCadastrarProduto:
 
         # Assert
         assert resposta.status_code == 400
+    
+    def test_cadastrar_produto_com_token_nao_admin_retorna_403(self, pclient, token_nao_admin):
+        # Arrange
+        payload = payload_produto_valido()
+        # Act
+        resposta = pclient.cadastrar(payload, token_nao_admin)
+         # Assert
+        assert resposta.status_code == 403
 
 
 @pytest.mark.produtos
@@ -168,7 +176,7 @@ class TestAtualizarProduto:
         assert resposta.status_code == 401
 
     def test_atualizar_produto_com_nome_duplicado_retorna_400(self, pclient, token):
-        # Arrange — cria dois produtos com nomes diferentes
+        # Arrange 
         payload1 = payload_produto_valido()  
         payload2 = payload_produto_valido()  
 
@@ -180,7 +188,7 @@ class TestAtualizarProduto:
         assert criacao2.status_code == 201
         produto_id2 = criacao2.json()["_id"]
 
-        # tenta atualizar produto2 com o nome do produto1
+      
         payload_duplicado = payload_produto_valido()
         payload_duplicado["nome"] = payload1["nome"]
 
@@ -193,6 +201,14 @@ class TestAtualizarProduto:
         # Cleanup
         pclient.excluir(produto_id1, token)
         pclient.excluir(produto_id2, token)
+    
+    def test_atualizar_produto_com_token_nao_admin_retorna_403(self, pclient, produto_cadastrado, token_nao_admin):
+        # Arrange
+        payload = payload_produto_valido()
+        # Act
+        resposta = pclient.atualizar(produto_cadastrado["id"], payload, token_nao_admin)
+        # Assert
+        assert resposta.status_code == 403
 
    
 
@@ -227,3 +243,7 @@ class TestExcluirProduto:
 
         # Assert
         assert resposta.status_code == 401
+
+    def test_excluir_produto_com_token_nao_admin_retorna_403(self, pclient, produto_cadastrado, token_nao_admin):
+        resposta = pclient.excluir(produto_cadastrado["id"], token_nao_admin)
+        assert resposta.status_code == 403
