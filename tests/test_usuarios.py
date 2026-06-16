@@ -1,6 +1,7 @@
 import pytest
 from src.helpers.factories import payload_usuario_valido
-
+from jsonschema import validate
+from src.helpers.schemas import SCHEMA_LISTA_USUARIOS, SCHEMA_USUARIO, SCHEMA_USUARIO_ERRADO
 
 # Arrange = Monta o payload, pega dados da fixture
 # Act = Chama o método do client
@@ -19,6 +20,8 @@ class TestListarUsuarios:
         assert "quantidade" in corpo
         assert "usuarios" in corpo
         assert isinstance(corpo["usuarios"], list)
+        validate(instance=resposta.json(), schema=SCHEMA_LISTA_USUARIOS)  # Valida o json
+
 
 
 @pytest.mark.usuarios
@@ -32,6 +35,7 @@ class TestCadastrarUsuario:
         # Assert
         assert resposta.status_code == 200
         assert "_id" in resposta.json()
+
 
     def test_cadastrar_usuario_com_email_duplicado_retorna_400(self, client, usuario_cadastrado):
         # Arrange — reutiliza o email já cadastrado pela fixture
@@ -97,17 +101,18 @@ class TestBuscarUsuarioPorId:
         assert corpo["_id"] == usuario_id
         assert corpo["nome"] == usuario_cadastrado["payload"]["nome"]
         assert corpo["email"] == usuario_cadastrado["payload"]["email"]
+        validate(instance=resposta.json(), schema=SCHEMA_USUARIO)
 
     def test_buscar_usuario_inexistente_retorna_400(self, client):
         # Arrange
-        id_inexistente = "000000000000000000000000"
+        id_inexistente = "abcdefghijklmnop"
 
         # Act
         resposta = client.buscar_por_id(id_inexistente)
 
-        # Assert — validamos apenas o status code, que é o contrato garantido
+        # Assert 
         assert resposta.status_code == 400
-
+        validate(instance=resposta.json(), schema=SCHEMA_USUARIO_ERRADO)  # Vai validar o json
 
 @pytest.mark.usuarios
 class TestAtualizarUsuario:

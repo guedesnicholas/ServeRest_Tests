@@ -1,7 +1,8 @@
 import pytest
 import uuid
 from src.helpers.factories import payload_produto_valido
-
+from jsonschema import validate
+from src.helpers.schemas import SCHEMA_LISTA_PRODUTOS, SCHEMA_PRODUTO, SCHEMA_PRODUTO_ERRADO
 
 @pytest.mark.produtos
 class TestListarProdutos:
@@ -15,7 +16,7 @@ class TestListarProdutos:
         assert "quantidade" in corpo
         assert "produtos" in corpo
         assert isinstance(corpo["produtos"], list)
-
+        validate(instance=resposta.json(), schema=SCHEMA_LISTA_PRODUTOS)  # Vai validar o json
 
 @pytest.mark.produtos
 class TestCadastrarProduto:
@@ -122,16 +123,18 @@ class TestBuscarProdutoPorId:
 
         # Assert
         assert resposta.status_code == 200
+        validate(instance=resposta.json(), schema=SCHEMA_PRODUTO)  # Vai validar o json
 
     def test_buscar_produto_inexistente_retorna_400(self, pclient):
         # Arrange
-        id_inexistente = "000000000000000000000000"
+        id_inexistente = "abcdefghijklmnop"
 
         # Act
         resposta = pclient.buscar_por_id(id_inexistente)
 
         # Assert
         assert resposta.status_code == 400
+        validate(instance=resposta.json(), schema=SCHEMA_PRODUTO_ERRADO)  # Vai validar o json
 
 
 @pytest.mark.produtos

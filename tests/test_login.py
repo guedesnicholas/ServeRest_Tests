@@ -1,4 +1,7 @@
 import pytest
+from jsonschema import validate
+from src.helpers.schemas import SCHEMA_LOGIN, SCHEMA_LOGIN_ERRADO
+
 
 @pytest.mark.login
 class Testlogins:
@@ -17,7 +20,7 @@ class Testlogins:
         # Assert
         assert resposta.status_code == 200
         assert "authorization" in resposta.json()
-
+        validate(instance=resposta.json(), schema=SCHEMA_LOGIN)  # Vai validar o json
 
 
     def test_login_email_inexistente_retorna_401(self, client, usuario_cadastrado):
@@ -34,6 +37,8 @@ class Testlogins:
         # Assert
         assert resposta.status_code == 401
         assert resposta.json()["message"] == "Email e/ou senha inválidos"
+        validate(instance=resposta.json(), schema=SCHEMA_LOGIN_ERRADO)  # Vai validar o json
+
 
     
     def test_login_senha_inexistente_retorna_401(self, client, usuario_cadastrado):
@@ -50,3 +55,4 @@ class Testlogins:
         # Assert
         assert resposta.status_code == 401
         assert resposta.json()["message"] == "Email e/ou senha inválidos"
+        validate(instance=resposta.json(), schema=SCHEMA_LOGIN_ERRADO)  # Vai validar o json
