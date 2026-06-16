@@ -15,7 +15,7 @@ Suíte de testes para o endpoint `/usuarios` , `/login` e `/produtos` da [ServeR
 │   ├── conftest.py              # Fixtures globais (com cleanup via yield)
 │   |── test_usuarios.py         # 13 cenários de teste
 │   |── test_login.py            #  3 cenários de teste
-│   └── test_produtos.py         # 16 cenários de teste
+│   └── test_produtos.py         # 19 cenários de teste
 ├── pytest.ini
 └── requirements.txt
 ```
@@ -73,18 +73,43 @@ pytest -v
 | 17 | Listar produtos retorna 200 e estrutura correta | GET /produtos |
 | 18 | Cadastrar produto válido retorna 201 com `_id` | POST /produtos |
 | 19 | Cadastrar produto sem token retorna 401 | POST /produtos |
-| 20 | Cadastrar produto com nome duplicado retorna 400 | POST /produtos |
-| 21 | Cadastrar produto sem nome retorna 400 | POST /produtos |
-| 22 | Cadastrar produto sem preco retorna 400 | POST /produtos |
-| 23 | Cadastrar produto sem descricao retorna 400 | POST /produtos |
-| 24 | Cadastrar produto sem quantidade retorna 400 | POST /produtos |
-| 25 | Buscar produto por ID existente retorna 200 | GET /produtos/:id |
-| 26 | Buscar produto por ID inexistente retorna 400 | GET /produtos/:id |
-| 27 | Atualizar produto existente retorna 200 | PUT /produtos/:id |
-| 28 | Atualizar produto sem token retorna 401 | PUT /produtos/:id |
-| 29 | Atualizar produto com nome duplicado retorna 400 | PUT /produtos/:id |
-| 30 | Excluir produto existente retorna 200 | DELETE /produtos/:id |
-| 31 | Excluir produto inexistente retorna 400 | DELETE /produtos/:id |
-| 32 | Excluir produto sem token retorna 401 | DELETE /produtos/:id |
+| 20 | Cadastrar produto com token não admin retorna 403 | POST /produtos |
+| 21 | Cadastrar produto com nome duplicado retorna 400 | POST /produtos |
+| 22 | Cadastrar produto sem nome retorna 400 | POST /produtos |
+| 23 | Cadastrar produto sem preco retorna 400 | POST /produtos |
+| 24 | Cadastrar produto sem descricao retorna 400 | POST /produtos |
+| 25 | Cadastrar produto sem quantidade retorna 400 | POST /produtos |
+| 26 | Buscar produto por ID existente retorna 200 | GET /produtos/:id |
+| 27 | Buscar produto por ID inexistente retorna 400 | GET /produtos/:id |
+| 28 | Atualizar produto existente retorna 200 | PUT /produtos/:id |
+| 29 | Atualizar produto sem token retorna 401 | PUT /produtos/:id |
+| 30 | Atualizar produto com token não admin retorna 403 | PUT /produtos/:id |
+| 31 | Atualizar produto com nome duplicado retorna 400 | PUT /produtos/:id |
+| 32 | Excluir produto existente retorna 200 | DELETE /produtos/:id |
+| 33 | Excluir produto inexistente retorna 400 | DELETE /produtos/:id |
+| 34 | Excluir produto sem token retorna 401 | DELETE /produtos/:id |
+| 35 | Excluir produto com token não admin retorna 403 | DELETE /produtos/:id |
+
+
+
+## Cobertura de Testes
+
+Método utilizado: **Status Code Coverage (Output)**
+
+Todos os status codes documentados pela ServeRest foram exercitados
+pelos testes para cada endpoint coberto.
+
+| Endpoint | Status Codes Documentados | Cobertos | Cobertura |
+|---|---|---|---|
+| POST /usuarios | 201, 400 | 201, 400 | 100% |
+| GET /usuarios/:id | 200, 400 | 200, 400 | 100% |
+| PUT /usuarios/:id | 200, 201, 400 | 200, 201, 400 | 100% |
+| DELETE /usuarios/:id | 200 | 200 | 100% |
+| POST /login | 200, 401 | 200, 401 | 100% |
+| POST /produtos | 201, 400, 401, 403 | 201, 400, 401, 403 | 100% |
+| GET /produtos/:id | 200, 400 | 200, 400 | 100% |
+| PUT /produtos/:id | 200, 400, 401, 403 | 200, 400, 401, 403 | 100% |
+| DELETE /produtos/:id | 200, 400, 401, 403 | 200, 400, 401, 403 | 100% |
+| **Total** | **todos** | **todos** | **100%** |
 
 

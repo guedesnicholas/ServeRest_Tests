@@ -17,7 +17,7 @@ corretos e respeitam as regras de negócio da API.
 | Ferramentas | Python 3.12, Pytest, Requests |
 | Ambiente | https://compassuol.serverest.dev |
 | Padrão de teste | AAA — Arrange, Act, Assert |
-| Isolamento | Email dinâmico com uuid por execução |
+| Isolamento | Email e nome de produto dinâmico com uuid por execução |
 | Cleanup | Fixtures com yield + cleanup manual nos testes autossuficientes |
 | Autenticação | Token obtido via POST /login, escopo de sessão |
 
@@ -85,42 +85,33 @@ corretos e respeitam as regras de negócio da API.
 
 ---
 
-### GET /produtos
-| # | Cenário | Status Esperado | Implementado |
-|---|---|---|---|
-| 17 | Listar todos os produtos | 200 | ✅ |
-
 ### POST /produtos
 | # | Cenário | Status Esperado | Implementado |
 |---|---|---|---|
-| 18 | Cadastrar produto com dados válidos | 201 | ✅ |
-| 19 | Cadastrar produto sem token | 401 | ✅ |
+| 17 | Cadastrar produto com dados válidos | 201 | ✅ |
+| 18 | Cadastrar produto sem token | 401 | ✅ |
+| 19 | Cadastrar produto com token de usuário não administrador | 403 | ✅ |
 | 20 | Cadastrar produto com nome duplicado | 400 | ✅ |
 | 21 | Cadastrar sem campo nome | 400 | ✅ |
 | 22 | Cadastrar sem campo preco | 400 | ✅ |
 | 23 | Cadastrar sem campo descricao | 400 | ✅ |
 | 24 | Cadastrar sem campo quantidade | 400 | ✅ |
 
-### GET /produtos/:id
-| # | Cenário | Status Esperado | Implementado |
-|---|---|---|---|
-| 25 | Buscar produto com ID existente | 200 | ✅ |
-| 26 | Buscar produto com ID inexistente | 400 | ✅ |
-
 ### PUT /produtos/:id
 | # | Cenário | Status Esperado | Implementado |
 |---|---|---|---|
-| 27 | Atualizar produto existente | 200 | ✅ |
-| 28 | Atualizar sem token | 401 | ✅ |
-| 29 | Atualizar com nome já usado por outro produto | 400 | ✅ |
+| 25 | Atualizar produto existente | 200 | ✅ |
+| 26 | Atualizar sem token | 401 | ✅ |
+| 27 | Atualizar com token de usuário não administrador | 403 | ✅ |
+| 28 | Atualizar com nome já usado por outro produto | 400 | ✅ |
 
 ### DELETE /produtos/:id
 | # | Cenário | Status Esperado | Implementado |
 |---|---|---|---|
-| 30 | Excluir produto existente | 200 | ✅ |
-| 31 | Excluir produto inexistente | 200 | ✅ |
-| 32 | Excluir sem token | 401 | ✅ |
-
+| 29 | Excluir produto existente | 200 | ✅ |
+| 30 | Excluir produto inexistente | 400 | ✅ |
+| 31 | Excluir sem token | 401 | ✅ |
+| 32 | Excluir com token de usuário não administrador | 403 | ✅ |
 ---
 
 ## Critérios de Qualidade
