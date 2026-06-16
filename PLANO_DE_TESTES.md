@@ -14,7 +14,7 @@ corretos e respeitam as regras de negócio da API.
 |---|---|
 | Tipo de teste | Testes de API (integração) |
 | Camada | HTTP direto, sem UI |
-| Ferramentas | Python 3.12, Pytest, Requests |
+| Ferramentas | Python 3.12, Pytest, Requests, JSON Schema |
 | Ambiente | https://compassuol.serverest.dev |
 | Padrão de teste | AAA — Arrange, Act, Assert |
 | Isolamento | Email e nome de produto dinâmico com uuid por execução |

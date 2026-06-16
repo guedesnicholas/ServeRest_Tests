@@ -135,16 +135,16 @@ estava previsto a cobertura.
 ### Validações de boundary em /usuarios
 | Cenário | Motivo |
 |---|---|
-| Email com formato inválido | Fora do escopo mínimo definido |
-| Password vazio | Fora do escopo mínimo definido |
+| Email com formato inválido | Não contemplado na cobertura planejada |
+| Password vazio | Não contemplado na cobertura planejada |
 
 ### Validações de boundary em /produtos
 | Cenário | Motivo |
 |---|---|
-| Preco negativo | Fora do escopo mínimo definido |
-| Preco zero | Fora do escopo mínimo definido |
-| Quantidade negativa | Fora do escopo mínimo definido |
-| Quantidade zero | Fora do escopo mínimo definido |
+| Preco negativo | Fora do escopo |
+| Preco zero | Fora do escopo  |
+| Quantidade negativa | Fora do escopo  |
+| Quantidade zero | Fora do escopo  |
 
 ### Testes de performance e carga
 Não foram realizados testes de carga ou stress. A ServeRest é um
