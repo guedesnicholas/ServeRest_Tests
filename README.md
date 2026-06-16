@@ -119,9 +119,10 @@ pelos testes para cada endpoint coberto.
 Foram implementadas validações de contrato utilizando JSON Schema para garantir que as respostas da API mantenham a estrutura esperada.
 
 Endpoints cobertos:
-- POST /usuarios
+- GET /usuarios
+- GET /usuarios/{id}
 - POST /login
-- POST /produtos
+- GET /produtos
 - GET /produtos/{id}
 
 
