@@ -64,7 +64,7 @@ def produto_cadastrado(pclient, token):
     pclient.excluir(produto_id, token)  
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="session") #evita múltiplos logins
 def token(client):
     # Arrange
     payload = {
